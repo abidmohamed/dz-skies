@@ -10,8 +10,8 @@ ROOT = Path(__file__).resolve().parent
 
 
 def step(title, *cmd):
-    print(f"\n== {title}")
-    r = subprocess.run([sys.executable, *cmd], cwd=ROOT)
+    print(f"\n== {title}", flush=True)
+    r = subprocess.run([sys.executable, "-u", *cmd], cwd=ROOT)   # -u keeps log lines in order
     if r.returncode:
         sys.exit(f"stopped: '{title}' failed")
 
