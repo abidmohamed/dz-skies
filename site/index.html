@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Algeria Air Routes</title>
+<meta name="description" content="Interactive map of every airport in Algeria, the air routes listed since 2014, and Eurostat passenger traffic to Europe since 1993 with a monthly forecast.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=B612+Mono:wght@400;700&family=Barlow+Condensed:wght@500;600&family=Barlow:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <h1>Algeria air routes</h1>
+    <p>Every airport and airfield in Algeria, the domestic and international routes airlines listed in six snapshot years, and Eurostat passenger counts on routes to Europe from 1993 to 2024.</p>
+  </header>
+
+  <div class="controls" role="group" aria-label="Filters">
+    <div class="ctl"><span id="lbl-mode">View</span>
+      <div class="seg" id="modes" role="group" aria-labelledby="lbl-mode">
+        <button type="button" data-m="routes" aria-pressed="true">Listed routes</button>
+        <button type="button" data-m="pax">Passengers to Europe</button>
+      </div></div>
+    <div class="ctl" data-for="routes"><span id="lbl-year">Snapshot year</span><div class="seg years" id="years" role="group" aria-labelledby="lbl-year"></div></div>
+    <div class="ctl" data-for="routes"><span id="lbl-type">Routes</span>
+      <div class="seg" id="types" role="group" aria-labelledby="lbl-type">
+        <button type="button" data-t="all" aria-pressed="true">All</button>
+        <button type="button" data-t="dom"><i class="key dom"></i>Domestic</button>
+        <button type="button" data-t="intl"><i class="key intl"></i>International</button>
+      </div></div>
+    <div class="ctl" data-for="routes"><label for="airline">Airline</label><select id="airline"></select></div>
+    <div class="ctl" data-for="pax" hidden><label for="py">Year</label>
+      <div class="yr"><button type="button" id="pyprev" aria-label="Previous year">‹</button><input type="range" id="py" step="1"><button type="button" id="pynext" aria-label="Next year">›</button><output id="pyout" for="py"></output></div></div>
+    <div class="ctl" data-for="pax" hidden><span id="lbl-meas">Measure</span>
+      <div class="seg" id="meas" role="group" aria-labelledby="lbl-meas">
+        <button type="button" data-v="P" aria-pressed="true">Passengers</button>
+        <button type="button" data-v="C">Flights</button>
+        <button type="button" data-v="S">Seats</button>
+      </div></div>
+    <div class="ctl grow"><label for="find">Find an airport</label><input id="find" type="search" list="aplist" placeholder="Code, city or name" autocomplete="off"><datalist id="aplist"></datalist></div>
+    <label class="ctl chk" for="idle"><input type="checkbox" id="idle" checked>Show airfields without flights</label>
+  </div>
+
+  <div class="stage">
+    <div class="mapwrap" id="mapwrap">
+      <svg id="map" role="group" aria-label="Map of Algerian airports and air routes"></svg>
+      <div class="badge" id="badge"></div>
+      <div class="mapbtns">
+        <div class="row"><button type="button" id="zin" aria-label="Zoom in">+</button><button type="button" id="zout" aria-label="Zoom out">−</button></div>
+        <div class="row"><button type="button" id="vdz">Algeria</button><button type="button" id="vall">All routes</button></div>
+      </div>
+      <div class="legend" id="legend" aria-hidden="true"></div>
+    </div>
+    <aside class="rail" id="rail" aria-live="polite"></aside>
+  </div>
+
+  <section class="block">
+    <div class="bhead">
+      <h2 id="tbl-title">Routes</h2>
+      <div class="tools">
+        <input id="q" type="search" placeholder="Filter this table" aria-label="Filter this table">
+        <button type="button" class="btn" id="csv">Copy as CSV</button>
+      </div>
+    </div>
+    <p class="note" id="tbl-note"></p>
+    <textarea id="csvbox" hidden readonly aria-label="CSV of the routes shown"></textarea>
+    <div class="tablewrap"><table id="tbl"><thead></thead><tbody></tbody></table></div>
+  </section>
+
+  <section class="block">
+    <h2>About the data</h2>
+    <div class="about">
+      <div><h3>What a route means here</h3>
+        <p>A route is a non-stop link between two airports that at least one airline listed in its schedule around the snapshot date. It does not say how many flights ran, how many passengers flew, or whether the flights operated at all.</p>
+        <p>The passenger view is different: those are counts reported to Eurostat by European airports, passengers carried in both directions on each route over the year.</p>
+        <p>Some listings are stale. Algiers–Casablanca by Royal Air Maroc stays listed through 2024, although flights between Algeria and Morocco stopped in September 2021. The August 2021 snapshot lists 99 international routes while Algeria had only partly reopened its borders after the COVID closure.</p></div>
+      <div><h3>Sources</h3>
+        <ul id="src"></ul></div>
+      <div><h3>Gaps</h3>
+        <ul>
+          <li>No snapshots exist for 2015–2020 or for 2025, so changes between snapshots cannot be dated more closely.</li>
+          <li>The 2014 file has no flight times, and its distances are great-circle distances computed here.</li>
+          <li>Airport classes (large, medium, small) are OurAirports labels, not an official Algerian classification.</li>
+          <li>Eurostat only publishes the main routes of each reporting airport. Smaller Algeria–Europe routes never appear, and a route can be missing for a year. A missing year means no published figure, not no flights.</li>
+          <li>Passenger figures stop at 2024 and cover Europe only. Nothing here counts domestic passengers or traffic to Africa, the Middle East or elsewhere.</li>
+          <li>The monthly forecast is a simple model: the same month of the last reported year, adjusted for the dates of Ramadan and Eid. Tested on 2018, 2019, 2023 and 2024 it was off by 10 to 15% per route and month in normal years, and it missed the 2023 rebound after COVID. About 7 in 10 past months fell inside the shaded range.</li>
+          <li>Türkiye reports seats and flights for most years but passengers only for 2023 and 2024. United Kingdom figures end in 2017.</li>
+        </ul></div>
+    </div>
+  </section>
+</div>
+<div id="tip" hidden></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

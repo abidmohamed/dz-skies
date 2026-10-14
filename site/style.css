@@ -1,0 +1,222 @@
+html { color-scheme: light }
+body { margin: 0 }
+img { max-width: 100% }
+[hidden] { display: none !important }
+
+/* Layout: a working chart table. Control strip on top, the map as the main stage with a
+   detail rail beside it (stacked on phones), then the full route table and the data notes. */
+:root {
+  --bg: #f1f4f5; --panel: #ffffff; --ink: #132029; --ink2: #475863; --ink3: #74848e;
+  --line: #d3dbe0; --sea: #d6e3e9; --land: #e9ece8; --land-dz: #fdfcf8; --border: #b4bfc3; --dz-border: #4c5c66;
+  --dom: #eb6834; --intl: #2a78d6; --ring: #a3b8c2; --chip: #e8edf0; --sel: #132029; --sel-ink: #ffffff;
+  --f-display: "Barlow Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "Barlow", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "B612 Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0d1317; --panel: #151d22; --ink: #e8eef1; --ink2: #aab8c0; --ink3: #7b8a93;
+  --line: #2a363d; --sea: #0a1920; --land: #19242a; --land-dz: #28363e; --border: #3a4a52; --dz-border: #93a6b0;
+  --dom: #d95926; --intl: #3987e5; --ring: #2f4753; --chip: #212c33; --sel: #e8eef1; --sel-ink: #10181d;
+  color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0d1317; --panel: #151d22; --ink: #e8eef1; --ink2: #aab8c0; --ink3: #7b8a93;
+  --line: #2a363d; --sea: #0a1920; --land: #19242a; --land-dz: #28363e; --border: #3a4a52; --dz-border: #93a6b0;
+  --dom: #d95926; --intl: #3987e5; --ring: #2f4753; --chip: #212c33; --sel: #e8eef1; --sel-ink: #10181d;
+  color-scheme: dark }
+
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--ink); font: 400 15px/1.45 var(--f-body); }
+.app { max-width: 1480px; margin: 0 auto; padding-inline: clamp(16px, 2.4vw, 32px); padding-block: 20px 48px; display: flex; flex-direction: column; gap: 16px }
+h1, h2, h3 { margin: 0; text-wrap: balance }
+h1 { font: 600 clamp(30px, 4vw, 42px)/1 var(--f-display); letter-spacing: .01em; text-transform: uppercase }
+h2 { font: 600 22px/1.1 var(--f-display); letter-spacing: .02em; text-transform: uppercase }
+h3 { font: 600 12px/1.2 var(--f-body); letter-spacing: .08em; text-transform: uppercase; color: var(--ink2) }
+p { margin: 0 }
+.mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums }
+.num { font-variant-numeric: tabular-nums }
+button, select, input { font: inherit; color: inherit }
+:focus-visible { outline: 2px solid var(--intl); outline-offset: 2px }
+
+.top { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 8px 32px }
+.top p { color: var(--ink2); max-width: 62ch }
+
+.controls { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: end; padding: 12px 14px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px }
+.ctl { display: flex; flex-direction: column; gap: 5px; min-width: 0 }
+.ctl > span, .ctl > label { font: 600 11px/1 var(--f-body); letter-spacing: .08em; text-transform: uppercase; color: var(--ink3) }
+.seg { display: flex; flex-wrap: wrap; border: 1px solid var(--line); border-radius: 5px; overflow: hidden; background: var(--bg) }
+.seg button { border: 0; background: transparent; padding: 7px 11px; cursor: pointer; border-right: 1px solid var(--line); line-height: 1.2 }
+.seg button:last-child { border-right: 0 }
+.seg button:hover { background: var(--chip) }
+.seg button[aria-pressed="true"] { background: var(--sel); color: var(--sel-ink); font-weight: 600 }
+.seg.years button { font-family: var(--f-mono); font-size: 13.5px }
+.key { display: inline-block; width: 14px; height: 3px; border-radius: 2px; vertical-align: middle; margin-right: 6px }
+.key.dom { background: var(--dom) } .key.intl { background: var(--intl) }
+select, input[type="search"] { background: var(--bg); border: 1px solid var(--line); border-radius: 5px; padding: 7px 9px; max-width: 100%; min-width: 0 }
+input[type="search"] { width: 250px }
+.chk { flex-direction: row; align-items: center; gap: 7px; padding-bottom: 7px; color: var(--ink2); cursor: pointer }
+.chk input { accent-color: var(--ink); width: 16px; height: 16px; margin: 0 }
+
+.stage { display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 16px; align-items: stretch }
+.mapwrap { position: relative; height: clamp(440px, 74vh, 800px); background: var(--panel); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; touch-action: none }
+#map { display: block; width: 100%; height: 100%; cursor: grab; background: var(--panel) }
+#map:active { cursor: grabbing }
+#map path { vector-effect: non-scaling-stroke; fill: none }
+#map .sphere { fill: var(--sea) }
+#map .land { fill: var(--land); stroke: var(--border); stroke-width: .6 }
+#map .dz { fill: var(--land-dz); stroke: var(--dz-border); stroke-width: 1.3 }
+#map .rng { stroke: var(--ring); stroke-width: 1 }
+#map .rlab text { font: 400 10px var(--f-mono); fill: var(--ink3); text-anchor: middle; paint-order: stroke; stroke: var(--sea); stroke-width: 3px }
+#map .route { stroke-width: 1.15; stroke-linecap: round; opacity: .5 }
+#map .route.dom { stroke: var(--dom) } #map .route.intl { stroke: var(--intl) }
+#map.has-sel .route { opacity: .06 }
+#map.has-sel .route.on { opacity: .95; stroke-width: 1.7 }
+#map .route.hov, #map.has-sel .route.hov { opacity: 1; stroke-width: 3 }
+#map .hit { stroke: transparent; stroke-width: 10; pointer-events: stroke; cursor: pointer }
+#map.has-sel .hit:not(.on) { pointer-events: none }
+#map .mk { cursor: pointer }
+#map .mk circle, #map .mk rect { fill: var(--ink); stroke: var(--land-dz); stroke-width: 1.5 }
+#map .mk.idle circle, #map .mk.idle rect { fill: var(--land-dz); stroke: var(--ink3); stroke-width: 1.2 }
+#map .mk.fx circle { fill: var(--ink2); stroke: var(--land); stroke-width: 1 }
+#map .mk.selected circle, #map .mk.selected rect { fill: var(--land-dz); stroke: var(--ink); stroke-width: 3.5 }
+#map.has-sel .mk:not(.on):not(.selected) { opacity: .22 }
+#map .mk text { font: 700 10.5px var(--f-mono); fill: var(--ink); paint-order: stroke; stroke: var(--land-dz); stroke-width: 3px; stroke-linejoin: round; dominant-baseline: central; pointer-events: none }
+#map .mk.fx text { font-weight: 400; fill: var(--ink2); stroke: var(--land) }
+#map .mk text[hidden] { display: none }
+#map .mk:focus-visible { outline: none }
+#map .mk:focus-visible circle, #map .mk:focus-visible rect { stroke: var(--intl); stroke-width: 3 }
+
+.mapbtns { position: absolute; top: 10px; right: 10px; display: flex; flex-direction: column; gap: 6px; align-items: flex-end }
+.mapbtns .row { display: flex; border: 1px solid var(--line); border-radius: 5px; overflow: hidden; background: var(--panel) }
+.mapbtns button { border: 0; border-right: 1px solid var(--line); background: var(--panel); padding: 6px 10px; cursor: pointer; min-width: 34px; line-height: 1.2 }
+.mapbtns button:last-child { border-right: 0 }
+.mapbtns button:hover { background: var(--chip) }
+.legend { position: absolute; left: 10px; bottom: 10px; background: color-mix(in srgb, var(--panel) 92%, transparent); border: 1px solid var(--line); border-radius: 5px; padding: 8px 10px; font-size: 12.5px; color: var(--ink2); display: grid; gap: 4px; max-width: min(250px, calc(100% - 20px)) }
+.legend div { display: flex; align-items: center; gap: 7px }
+.legend svg { flex: none }
+.badge { position: absolute; left: 10px; top: 10px; background: color-mix(in srgb, var(--panel) 92%, transparent); border: 1px solid var(--line); border-radius: 5px; padding: 6px 10px; max-width: calc(100% - 150px) }
+.badge b { font: 600 26px/1 var(--f-display); letter-spacing: .02em }
+.badge span { display: block; font-size: 12px; color: var(--ink2) }
+
+.rail { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; min-width: 0; height: clamp(440px, 74vh, 800px); overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 18px }
+.rail section { display: flex; flex-direction: column; gap: 8px; min-width: 0 }
+.back { align-self: flex-start; border: 1px solid var(--line); background: var(--bg); border-radius: 5px; padding: 5px 10px; cursor: pointer; font-size: 13px }
+.back:hover { background: var(--chip) }
+.who { display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap }
+.who .code { font: 700 34px/1 var(--f-mono) }
+.who .nm { font: 600 21px/1.1 var(--f-display); letter-spacing: .01em; min-width: 0; flex: 1 1 180px }
+.sub { color: var(--ink2); font-size: 14px }
+.facts { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 3px 14px; font-size: 13.5px; margin: 0 }
+.facts dt { color: var(--ink3) } .facts dd { margin: 0; overflow-wrap: anywhere }
+.tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 10px }
+.tile b { display: block; font: 600 30px/1 var(--f-display) }
+.tile span { display: block; font-size: 12.5px; color: var(--ink2); line-height: 1.25; margin-top: 3px }
+.tile i { display: block; font-style: normal; font-size: 11.5px; color: var(--ink3) }
+.lg { display: flex; gap: 14px; font-size: 12.5px; color: var(--ink2); flex-wrap: wrap }
+.sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: -1px }
+.sw.dom { background: var(--dom) } .sw.intl { background: var(--intl) }
+.note { font-size: 12.5px; color: var(--ink3); line-height: 1.4 }
+.chart svg { display: block; width: 100%; height: auto; overflow: visible }
+.chart .col { cursor: pointer }
+.chart .col:focus-visible { outline: none } .chart .col:focus-visible .hitbox { stroke: var(--intl); stroke-width: 2 }
+.chart .hitbox { fill: transparent }
+.chart .col:hover .hitbox { fill: var(--chip) }
+.chart .dom { fill: var(--dom) } .chart .intl { fill: var(--intl) }
+.chart text { font: 400 11px var(--f-mono); fill: var(--ink2); text-anchor: middle }
+.chart text.tot { fill: var(--ink) }
+.chart .cur text { font-weight: 700; fill: var(--ink) }
+.chart .base { stroke: var(--line); stroke-width: 1 }
+.chart .curmark { fill: var(--ink) }
+
+.rank { display: grid; gap: 2px }
+.rank button, .rank .rowx { display: grid; grid-template-columns: 46px minmax(0, 1fr) 30px; gap: 4px 8px; align-items: center; text-align: left; border: 0; background: transparent; padding: 4px 6px; border-radius: 4px; width: 100% }
+.rank button { cursor: pointer } .rank button:hover { background: var(--chip) }
+.rank .c { font: 700 12.5px var(--f-mono) }
+.rank .n { font-size: 13.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap }
+.rank .v { text-align: right; font: 400 12.5px var(--f-mono) }
+.rank .bar { grid-column: 2 / 4; display: flex; gap: 2px; height: 6px }
+.rank .bar i { display: block; height: 100%; min-width: 2px }
+.rank .bar i.dom { background: var(--dom) } .rank .bar i.intl { background: var(--intl) }
+.rank .bar i:last-child { border-radius: 0 3px 3px 0 }
+.rank.wide button, .rank.wide .rowx { grid-template-columns: minmax(0, 1fr) 30px } .rank.wide .bar { grid-column: 1 / 3 }
+
+.dest { display: grid; gap: 1px }
+.dest button { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; gap: 0 8px; align-items: baseline; text-align: left; border: 0; border-bottom: 1px solid var(--line); background: transparent; padding: 6px 6px; cursor: pointer; width: 100% }
+.dest button:hover, .dest button:focus-visible { background: var(--chip) }
+.dest .c { font: 700 13px var(--f-mono) }
+.dest .n { font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap }
+.dest .m { grid-column: 2 / 4; font-size: 12px; color: var(--ink2); display: flex; flex-wrap: wrap; gap: 2px 10px; align-items: center }
+.dots { display: inline-flex; gap: 2px; vertical-align: middle }
+.dots i { width: 7px; height: 7px; border: 1px solid var(--ink3); border-radius: 1px; display: block }
+.dots i.y { background: var(--ink2); border-color: var(--ink2) }
+.dots i.cur { outline: 1.5px solid var(--ink); outline-offset: 1px }
+.grp { font: 600 11px/1 var(--f-body); letter-spacing: .08em; text-transform: uppercase; color: var(--ink3); padding: 10px 6px 4px; display: flex; align-items: center; gap: 6px }
+details { font-size: 13.5px } summary { cursor: pointer; color: var(--ink2) }
+.chips { display: flex; flex-wrap: wrap; gap: 4px; padding-top: 6px }
+.chips button { font: 400 12px var(--f-mono); border: 1px solid var(--line); background: var(--bg); border-radius: 4px; padding: 2px 6px; cursor: pointer }
+.chips button:hover { background: var(--chip) }
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 2px }
+
+.block { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 12px; min-width: 0 }
+.bhead { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: space-between }
+.bhead .tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center }
+.btn { border: 1px solid var(--line); background: var(--bg); border-radius: 5px; padding: 7px 11px; cursor: pointer }
+.btn:hover { background: var(--chip) }
+.tablewrap { overflow: auto; max-height: 520px; border: 1px solid var(--line); border-radius: 5px }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; min-width: 760px }
+th, td { padding: 6px 10px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap }
+td.wrap { white-space: normal; min-width: 180px }
+th { position: sticky; top: 0; background: var(--panel); font: 600 11px/1.2 var(--f-body); letter-spacing: .07em; text-transform: uppercase; color: var(--ink2); z-index: 1 }
+th button { all: unset; cursor: pointer; display: inline-flex; gap: 4px; align-items: center }
+th button:focus-visible { outline: 2px solid var(--intl); outline-offset: 2px }
+td.r, th.r { text-align: right }
+tbody tr:hover { background: var(--chip) }
+#csvbox { width: 100%; height: 140px; font: 12px var(--f-mono); background: var(--bg); color: var(--ink); border: 1px solid var(--line); border-radius: 5px; padding: 8px }
+.about { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px 28px }
+.about div { display: flex; flex-direction: column; gap: 6px; min-width: 0 }
+.about p, .about li { color: var(--ink2); font-size: 14px }
+.about ul { margin: 0; padding-left: 18px; display: grid; gap: 4px }
+
+#tip { position: fixed; z-index: 20; pointer-events: none; background: var(--sel); color: var(--sel-ink); border-radius: 5px; padding: 7px 10px; font-size: 12.5px; line-height: 1.35; max-width: 280px; box-shadow: 0 4px 14px rgba(0,0,0,.25) }
+#tip b { font-family: var(--f-mono); font-size: 12.5px } #tip span { opacity: .8 }
+
+#map.pax .route { opacity: .62 }
+#map.pax.has-sel .route { opacity: .06 }
+#map.pax.has-sel .route.on { opacity: .85 }
+#map.pax .route.hov, #map.pax.has-sel .route.hov { opacity: 1; stroke: var(--ink) }
+.yr { display: flex; align-items: center; gap: 8px; min-width: 0 }
+.yr output { font: 700 20px/1 var(--f-mono); min-width: 4ch }
+.yr input[type="range"] { width: clamp(140px, 22vw, 300px); accent-color: var(--ink); min-width: 0 }
+.yr button { border: 1px solid var(--line); background: var(--bg); border-radius: 5px; padding: 5px 9px; cursor: pointer; line-height: 1.2 }
+.yr button:hover { background: var(--chip) }
+.chart .ycol { cursor: pointer }
+.chart .ycol .v { fill: var(--intl); opacity: .5 }
+.chart .ycol:hover .v, .chart .ycol.cur .v { opacity: 1 }
+.chart .ycol:focus-visible { outline: none } .chart .ycol:focus-visible .hitbox { stroke: var(--intl); stroke-width: 2 }
+.chart .ycol:hover .hitbox { fill: var(--chip) }
+.chart .grid { stroke: var(--line); stroke-width: 1 }
+.chart text.ax { text-anchor: start; fill: var(--ink3); font-size: 10px }
+.chart .fline { fill: none; stroke: var(--intl); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round }
+.chart .fline.fc { stroke-dasharray: 5 4 }
+.chart .fband { fill: var(--intl); opacity: .16 }
+.chart .fdiv { stroke: var(--ink3); stroke-width: 1 }
+.chart .mhit { fill: transparent } .chart .mhit:hover { fill: var(--chip); opacity: .6 }
+.chart text.lbl { fill: var(--ink3); font-size: 10px }
+.lg .lk { display: inline-block; width: 18px; height: 0; border-top: 2px solid var(--intl); vertical-align: middle; margin-right: 6px }
+.lg .lk.fc { border-top-style: dashed } .lg .bk { display: inline-block; width: 14px; height: 10px; background: var(--intl); opacity: .2; vertical-align: -1px; margin-right: 6px; border-radius: 2px }
+.spark { flex: none; vertical-align: middle }
+.spark path { fill: none; stroke: var(--ink3); stroke-width: 1.25 }
+.spark circle { fill: var(--intl) }
+.dest .val { font: 400 12.5px var(--f-mono) }
+.rank.r3 button { grid-template-columns: 76px minmax(0, 1fr) 54px } .rank .v { white-space: nowrap }
+.rank.wide.big .rowx, .rank.wide.big button { grid-template-columns: minmax(0, 1fr) 54px }
+@media (max-width: 980px) {
+  .stage { grid-template-columns: minmax(0, 1fr) }
+  .rail { height: auto; overflow: visible }
+  .mapwrap { height: clamp(380px, 62vh, 620px) }
+}
+@media (max-width: 520px) {
+  .legend { font-size: 11.5px; padding: 6px 8px } .legend .opt { display: none }
+  input[type="search"] { width: 100% } .ctl.grow { flex: 1 1 100% }
+  .badge { max-width: calc(100% - 130px) } .badge b { font-size: 22px }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important } }

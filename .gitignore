@@ -1,0 +1,9 @@
+# downloaded sources (large, and some have no licence that allows redistribution)
+raw/
+# derived tables that include those sources; rebuilt by the pipeline and by the deploy workflow
+build/
+site/data.json
+__pycache__/
+*.pyc
+node_modules/
+.venv/

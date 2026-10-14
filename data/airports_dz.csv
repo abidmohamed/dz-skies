@@ -1,0 +1,111 @@
+id,iata,icao,name,city,class,lon,lat,elevation_m,wikipedia
+AAE,AAE,DABB,Annaba Rabah Bitat Airport,Annaba,L,7.8133,36.8268,4,https://en.wikipedia.org/wiki/Rabah_Bitat_Airport
+ALG,ALG,DAAG,Houari Boumediene Airport,Algiers,L,3.2145,36.6939,24,https://en.wikipedia.org/wiki/Houari_Boumediene_Airport
+AZR,AZR,DAUA,Touat-Cheikh Sidi Mohamed Belkebir Airport,Adrar,M,-0.1864,27.8376,280,https://en.wikipedia.org/wiki/Touat_Cheikh_Sidi_Mohamed_Belkebir_Airport
+BFW,BFW,DAOS,Sidi Bel Abbes Airport,Sidi Bel Abbès,S,-0.5933,35.1718,491,https://en.wikipedia.org/wiki/Sidi_Bel_Abb%C3%A8s_Airport
+BJA,BJA,DAAE,Soummam–Abane Ramdane Airport,Bejaia,L,5.0699,36.7125,6,https://en.wikipedia.org/wiki/Abane_Ramdane_Airport
+BLJ,BLJ,DABT,Batna Mostefa Ben Boulaid Airport,Batna,L,6.3086,35.7521,822,https://en.wikipedia.org/wiki/Batna_Airport
+BMW,BMW,DATM,Bordj Badji Mokhtar Airport,Bordj Badji Mokhtar,M,0.927,21.3778,397,https://en.wikipedia.org/wiki/Bordj_Mokhtar_Airport
+BSK,BSK,DAUB,Biskra - Mohamed Khider Airport,Biskra,L,5.7389,34.7932,88,https://en.wikipedia.org/wiki/Biskra_Airport
+BUJ,BUJ,DAAD,Bou Saada Airport,Ouled Sidi Brahim,M,4.2064,35.3325,459,https://en.wikipedia.org/wiki/Bou_Saada_Airport
+CBH,CBH,DAOR,Béchar Boudghene Ben Ali Lotfi Airport,Bechar,M,-2.2699,31.6457,811,https://en.wikipedia.org/wiki/B%C3%A9char_Ouakda_Airport
+CFK,CFK,DAOI,Chlef Aboubakr Belkaid International Airport,Chlef,L,1.3411,36.2166,141,https://en.wikipedia.org/wiki/Chlef_International_Airport
+CZL,CZL,DABC,Mohamed Boudiaf International Airport,Constantine,L,6.6204,36.276,690,https://en.wikipedia.org/wiki/Mohamed_Boudiaf_International_Airport
+DA10,,DA10,Illizi Airport,Illizi,S,8.4837,26.5736,541,
+DA11,,DAOM,Hamaguir Airport,Hamaguir,S,-3.0678,30.879,747,
+DA12,,DA12,El Abiodh Sidi Cheikh Airport,El Abiodh Sidi Cheikh,S,0.5247,32.8985,903,
+DA13,,DA13,Tinfouchy Airport,Oum El Assel,S,-5.8229,28.8793,549,
+DA15,,DA15,Saïda Airport,Ouled Khaled,S,0.1517,34.8972,744,
+DA16,,DA16,Tindouf East Airport,Tindouf,S,-7.5001,27.5859,434,
+DAAB,,DAAB,Blida Airport,Blida,M,2.8142,36.5036,163,https://en.wikipedia.org/wiki/Blida_Airport
+DAAF,,DAAF,Aoulef Airport,Aoulef,S,1.1111,27.0624,309,
+DAAK,,DAAK,Boufarik Air Base,Boufarik,M,2.8761,36.5458,102,https://en.wikipedia.org/wiki/Boufarik_Airport
+DAAM,,DAAM,Telerghma Airport,Telerghma,S,6.3646,36.1087,757,https://en.wikipedia.org/wiki/Telergma_Airport
+DAAN,,DAAN,Reggane Air Base,Reggane,S,0.2882,26.7124,291,https://en.wikipedia.org/wiki/Reggane_Airport
+DAAQ,,DAAQ,Ain Oussera Airport,Ain Oussera,S,2.8787,35.5254,649,https://en.wikipedia.org/wiki/A%C3%AFn_Oussera_Airport
+DAAW,,DAAW,Bordj Omar Driss Airport,Bordj Omar Driss,S,6.8362,28.136,367,https://en.wikipedia.org/wiki/Bordj_Omar_Driss_Airport
+DAAX,,DAAX,Chéraga Airport,Chéraga,S,2.9284,36.7782,120,
+DAAZ,,DAAZ,Relizane Airport,Relizane,M,0.6259,35.753,85,https://en.wikipedia.org/wiki/Relizane_Airport
+DABO,,DAEO,Oum El Bouaghi Air Base,Oum El Bouaghi,S,7.2677,35.8744,908,https://en.wikipedia.org/wiki/Oum_el_Bouaghi_Airport
+DAEN,,DAEN,Rhoud Nouss Airport,Rhoude Nouss,S,6.7113,29.7289,252,
+DAFI,,DAFI,Tsletsi Airport,Djelfa,S,3.351,34.6657,1143,https://en.wikipedia.org/wiki/Tsletsi_Airport
+DAOC,,DAOC,Béchar Ouakda Aerodrome,Béchar,S,-2.1847,31.6429,810,https://en.wikipedia.org/wiki/B%C3%A9char_Ouakda_aerodrome
+DAOE,,DAOE,Bousfer Air Base,Bousfer,S,-0.8054,35.7354,56,https://en.wikipedia.org/wiki/Bousfer_Air_Base
+DAOH,,DAOH,Chenachene Airport,Chenachen,S,-4.22,26.051,374,
+DJG,DJG,DAAJ,Tiska Djanet Airport,Djanet,L,9.4637,24.2854,968,https://en.wikipedia.org/wiki/Djanet_Inedbirene_Airport
+DZ-0001,,DZ-0001,Hamra Airport,Hassi Bel Guebour,S,6.4886,29.2214,,
+DZ-0002,,DZ-0002,Gara Djebilet Airport,Âouinet Bel Egrâ,S,-7.1648,26.8835,,
+DZ-0004,,DZ-0004,Béni Abbès Airport,Béni Abbès,S,-2.1373,30.1256,,
+DZ-0005,,DZ-0005,Boulaadam Air Base,Fort Lotfi,S,-3.9939,29.6397,,
+DZ-0007,,DZ-0007,Zéralda Hospital Helipad,Zéralda,H,2.8437,36.7013,,
+DZ-0008,,DZ-0008,Ain Naadja Military Hospital Helipad,Djasr Kasentina,H,3.0661,36.7206,,
+DZ-0009,,DZ-0009,Algiers Great Mosque Heliport,Mohammadia,H,3.1442,36.7346,,
+DZ-0010,,DZ-0010,Timiaouine Heliport,Timiaouine,H,1.8254,20.4392,,
+DZ-0012,,DZ-0012,Groupement Reggane Nord Airport,Reggane,S,0.207,26.8063,269,
+DZ-0013,,DZ-0013,Reggane Airport,Sali,S,0.072,26.9154,273,
+DZ-0014,,DZ-0014,Cherchell Military Academy Heliport,Cherchell,H,2.2054,36.5943,203,
+DZ-0016,,DZ-0016,Amguid Regional Airport,Idlès,M,5.3254,26.3934,609,
+DZ-0017,,DZ-0017,Menzel Lejmat Nord Airport,El Borma,S,7.8348,30.3356,,
+DZ-0018,,DZ-0018,El Merk Airport,Debdeb,S,8.1631,30.3044,,
+DZ-0019,,DZ-0019,Hassi Bel Guebour Airport,Hassi Bel Guebour,S,6.4977,28.6835,,
+DZ-0020,,DZ-0020,Gassi Touil Airport,Hassi Messaoud,S,6.4527,30.5145,,
+DZ-0021,,DZ-0021,Trczina Airport,Hassi Messaoud,S,6.3471,31.1206,,
+DZ-0022,,DZ-0022,El Moustakbal Base Heliport,Hassi Messaoud,H,6.1878,31.5647,,
+DZ-0023,,DZ-0023,El Borma Ouargla Airport,El Borma,S,9.1234,31.5795,,
+DZ-0024,,DZ-0024,Bir H'Med Airport,El Borma,S,8.2368,31.5822,,
+DZ-0025,,DZ-0025,Rhoud El Baguel Airport,El Borma,S,6.9536,31.3859,,
+DZ-0026,,DZ-0026,Hassi Messaoud East Airport,Hassi Messaoud,S,6.6407,31.506,,
+DZ-0027,,DZ-0027,Hassi Fehal Airport,Hassi Fehal,S,3.7157,31.6886,,
+DZ-0028,,DZ-0028,Oued Zine Airport,Tamentit,S,0.2448,28.1416,,
+DZ-0029,,DZ-0029,Oued Zine North Airport,Tamentit,S,0.2026,28.2129,,
+DZ-0030,,DZ-0030,Tinzaouten South Airport,Tin Zaoutine,S,3.0223,19.9937,,
+DZ-0031,,DZ-0031,Tin Zaoutine Heliport,Tin Zaoutine,H,2.9614,19.9653,,
+DZ-0032,,DZ-0032,Tawendert Heliport,Tawendert,H,2.4609,20.3785,,
+DZ-0033,,DZ-0033,Tarat Heliport,Illizi,H,9.3912,26.2051,,
+DZ-0034,,DZ-0034,Krechba Airport,Hassi Gara,S,2.2059,29.0713,,
+DZ-0035,,DZ-0035,Tegentour Airport,In Salah,S,2.5187,28.4691,,
+DZ-0036,,DZ-0036,REG In Salah Airport,In Salah,S,2.1283,28.0773,,
+DZ-0037,,DZ-0037,REG In Salah North Airport,In Salah,S,2.1405,28.0861,,
+DZ-0038,,DZ-0038,Oued Zine East Airport,Tamentit,S,0.3286,28.1189,,
+DZ-0039,,DZ-0039,Touat Oil Airport,Tamentit,S,0.239,27.82,,
+DZ-0040,,DZ-0040,Ras el Miaad Airport,Ras el Miaad,S,4.46,34.2383,,
+DZ-0041,,DZ-0041,Serouenout Heliport,Serouenout,H,7.4716,24.3026,1117,
+DZ-0042,,DZ-0042,Takhrekhuri Air Base,Takhrekhuri,S,10.4375,24.4264,835,
+DZ-0043,,DZ-0043,Rekiule Airport,In Aménas,S,9.1474,27.8935,615,
+DZ-0044,,DZ-0044,Bordj Omar Driss Heliport,Bordj Omar Driss,H,6.8252,28.1289,355,
+DZ-0046,,DAEF,Tin Fouye Tabankort Airport,Bordj Omar Driss,S,7.5519,28.4388,476,
+DZ-0047,,DZ-0047,Tin Fouye Tabankort South Airport,Bordj Omar Driss,S,7.5687,28.4111,492,
+DZ-0048,,DZ-0048,Omanet Airport,In Aménas,S,8.8804,28.7309,537,
+DZ-0049,,DZ-0049,Tin Fouye Tabankort East Airport,Bordj Omar Driss,S,8.2411,28.4156,449,
+DZ-0050,,DZ-0050,Stah Airport,Debdeb,S,9.8522,28.63,712,
+DZ-0051,,DZ-0051,Tit Airport,Tit,S,1.5823,27.0609,307,
+DZ-0052,,DZ-0052,Zaouiet Kounta Airport,Zaouiet Kounta,S,-0.1663,27.2515,271,
+DZ-0053,,DZ-0053,Ouled Mahmoud Airport,Metarfa,S,0.0365,28.6128,270,
+DZ-0055,,DZ-0055,Tinzaouten North Airport,,S,3.027,20.0567,,
+DZ-0056,,DZ-0056,1st November University Hospital Heliport,Oran,H,-0.5828,35.7011,139,
+EBH,EBH,DAOY,El Bayadh Airport,El Bayadh,S,1.0925,33.7217,1369,https://en.wikipedia.org/wiki/El_Bayadh_Airport
+ELG,ELG,DAUE,El Golea Airport,El Golea,M,2.8616,30.5807,398,https://en.wikipedia.org/wiki/El_Golea_Airport
+ELU,ELU,DAUO,Guemar Airport - مطار قمار بالوادي,El Oued,M,6.7768,33.5114,61,https://en.wikipedia.org/wiki/Guemar_Airport
+GHA,GHA,DAUG,Noumérat - Moufdi Zakaria Airport,Ghardaia,M,3.7941,32.3841,460,https://en.wikipedia.org/wiki/Noumerate_Airport
+GJL,GJL,DAAV,Jijel Ferhat Abbas Airport,Jijel,L,5.8737,36.7941,10,https://en.wikipedia.org/wiki/Jijel_Ferhat_Abbas_Airport
+HME,HME,DAUH,Hassi Messaoud-Oued Irara Krim Belkacem Airport,Hassi Messaoud,M,6.1404,31.673,141,https://en.wikipedia.org/wiki/Oued_Irara_Airport
+HRM,HRM,DAFH,Hassi R'Mel Airport,Hassi R'Mel,M,3.3115,32.9304,774,https://en.wikipedia.org/wiki/Hassi_R'Mel_Airport
+IAM,IAM,DAUZ,Zarzaitine - In Aménas Airport,In Amenas,M,9.6429,28.0515,562,https://en.wikipedia.org/wiki/In_Amenas_Airport
+INF,INF,DATG,In Guezzam Airport,In Guezzam,S,5.7493,19.5605,399,https://en.wikipedia.org/wiki/In_Guezzam_Airport
+INZ,INZ,DAUI,In Salah Airport,In Salah,M,2.512,27.251,273,https://en.wikipedia.org/wiki/In_Salah_Airport
+LOO,LOO,DAUL,Laghouat - Molay Ahmed Medeghri Airport,Laghouat,M,2.9283,33.7644,765,https://en.wikipedia.org/wiki/L%27Mekrareg_Airport
+MQV,MQV,DA14,Mostaganem Airport,Sayada,S,0.1445,35.9052,223,https://en.wikipedia.org/wiki/Mostaganem_Airport
+MUW,MUW,DAOV,Ghriss Airport,Ghriss,M,0.1471,35.2077,513,https://en.wikipedia.org/wiki/Ghriss_Airport
+MZW,MZW,DAAY,Mecheria Airport,Mechria,M,-0.2424,33.5359,1175,http://fr.wikipedia.org/wiki/A%C3%A9roport_de_Mecheria
+OGX,OGX,DAUU,Ain Beida Airport,Ouargla,M,5.4128,31.9172,149,https://en.wikipedia.org/wiki/Ain_Beida_Airport
+ORN,ORN,DAOO,Oran Es-Sénia (Ahmed Ben Bella) International Airport,Oran,L,-0.6225,35.6206,89,https://en.wikipedia.org/wiki/Oran_Es_Senia_Airport
+QSF,QSF,DAAS,Ain Arnat Airport,Setif,M,5.3299,36.1785,1024,https://en.wikipedia.org/wiki/Ain_Arnat_Airport
+TAF,TAF,DAOL,Oran Tafraoui Airport,Tafraoui,M,-0.5323,35.5424,111,https://en.wikipedia.org/wiki/Oran_Tafraoui_Airport
+TEE,TEE,DABS,Cheikh Larbi Tébessi Airport,Tebessa,M,8.1207,35.4316,811,https://en.wikipedia.org/wiki/T%C3%A9bessa_Airport
+TGR,TGR,DAUK,Touggourt Sidi Madhi Airport,Touggourt,M,6.0887,33.0678,85,https://en.wikipedia.org/wiki/Touggourt_Sidi_Madhi_Airport
+TID,TID,DAOB,Abdelhafid Boussouf Bou Chekif Airport,Tiaret,M,1.4631,35.3411,989,https://en.wikipedia.org/wiki/Bou_Chekif_Airport
+TIN,TIN,DAOF,Tindouf Airport,Tindouf,M,-8.1671,27.7004,442,https://en.wikipedia.org/wiki/Tindouf_Airport
+TLM,TLM,DAON,Zenata – Messali El Hadj Airport,Tlemcen,L,-1.4571,35.0127,248,https://en.wikipedia.org/wiki/Zenata_%E2%80%93_Messali_El_Hadj_Airport
+TMR,TMR,DAAT,Aguenar – Hadj Bey Akhamok Airport,Tamanrasset,L,5.4508,22.811,1377,https://en.wikipedia.org/wiki/Tamanrasset_Airport
+TMX,TMX,DAUT,Timimoun Airport,Timimoun,M,0.276,29.2371,313,https://en.wikipedia.org/wiki/Timimoun_Airport
+VVZ,VVZ,DAAP,Illizi Takhamalt Airport,Illizi,M,8.6227,26.7235,541,https://en.wikipedia.org/wiki/Illizi_Airport
